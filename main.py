@@ -6,35 +6,34 @@ app = Flask(__name__)
 def get_data():
     # Establish a connection to the PostgreSQL database
     conn = psycopg2.connect(
-        host="localhost",
-        port="5432",
-        database="mydb",
-        user="postgres",
-        password="eric"
-    )
+    host="localhost",
+    database="retailer_db",
+    user="root",
+    password="password",
+    port="5432")
 
     # Create a cursor object to interact with the database
     cur = conn.cursor()
 
-    # Execute the SQL query to fetch data from the "testob" table
-    cur.execute("SELECT * FROM testob WHERE state > 3")
+    # Execute the SQL query to fetch data from the "object" table
+    cur.execute("SELECT * FROM object WHERE state > 1")
     # Fetch all the rows returned by the query
     data = cur.fetchall()
 
     # Get number of persons in roid A
-    cur.execute("SELECT COUNT(ID) AS NUMA FROM testob WHERE roid = 'A'")
+    cur.execute("SELECT COUNT(ID) AS NUMA FROM object WHERE roi = 'RA'")
     dataA = cur.fetchone()[0]
 
     # Get number of persons in roid B
-    cur.execute("SELECT COUNT(ID) AS NUMB FROM testob WHERE roid = 'B'")
+    cur.execute("SELECT COUNT(ID) AS NUMB FROM object WHERE roi = 'RB'")
     dataB = cur.fetchone()[0]
 
-    # Get number of persons in roid C
-    cur.execute("SELECT COUNT(ID) AS NUMC FROM testob WHERE roid = 'C'")
+    # Get number of persons in roi C
+    cur.execute("SELECT COUNT(ID) AS NUMC FROM object WHERE roi = 'RC'")
     dataC = cur.fetchone()[0]
 
-    # Get number of persons in roid D
-    cur.execute("SELECT COUNT(ID) AS NUMD FROM testob WHERE roid = 'D'")
+    # Get number of persons in roi D
+    cur.execute("SELECT COUNT(ID) AS NUMD FROM object WHERE roi = 'RF'")
     dataD = cur.fetchone()[0]
 
     # Close the cursor and the database connection
