@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video Streaming and Alert Messages</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    {% block content %}
+    <div id="container">
+        <div id="video-info-container">
+            <div id="video-container">
+                <!-- Embed your video player here -->
+                <!-- Replace "your_video_source" with your actual video source URL -->
+                <video width="100%" height="100%" controls>
+                    <source src="your_video_source" type="video/mp4">
+                    Your browser does not support HTML5 video.
+                </video>
+            </div>
+            <div id="info-container">
+                <h2>        </h2>
+                
+                    <div id="background_chart">
+                        <canvas id="myChart1" ></canvas>
+                      </div>
+                
+            </div>
+        </div>
+        <div id="alert-container">
+            <h2>Alert Messages</h2>
+            <div id="alert-wrapper">
+                <div id="alert-frame">
+                    {% for message in messages %}
+                    <div class="alert">
+                        <span>{{ message }}</span>
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    
+    
+    <script>
+      const ctx = document.getElementById('myChart1');
+    
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Area A', 'Area B', 'Area C', 'Area D'],
+          datasets: [{
+            label: 'Person in Area',
+            data: [{{ dataA }}, {{ dataB }}, {{ dataC }}, {{ dataD }}],
+            backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(255, 159, 64, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)'],
+            borderWidth: 2
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          scales: {
+            x: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    </script>
+    <!-- <script>
+        const element = document.getElementById('myChart2');
+        element.style.width = '600px'; // Set the text color to red
+        element.style.height = '300px'; // Set the font size to 24 pixels
+    </script> -->
+        
+    
+    
+    
+</body>
+</html>
