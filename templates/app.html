@@ -15,7 +15,6 @@
 </head>
 
 <body>
-  {% block content %}
   <div id="container">
     <div id="video-info-container">
       <div id="video-container">
@@ -39,65 +38,16 @@
       <h2>Alert Messages</h2>
       <div id="alert-wrapper">
         <div id="alert-frame">
-          {% for message in messages %}
-          <div class="alert">
+          <!-- {% for message in messages %}
+          <div class="alert" id = "msg">
             <span>{{ message }}</span>
             <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
           </div>
-          {% endfor %}
+          {% endfor %} -->
         </div>
       </div>
     </div>
   </div>
-  {% endblock %}
-
-  <script>
-    const ctx = document.getElementById('myChart1');
-
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Area A', 'Area B', 'Area C', 'Area D'],
-        datasets: [{
-          label: 'Person in Area',
-          data: [{
-            {
-              dataA
-            }
-          }, {
-            {
-              dataB
-            }
-          }, {
-            {
-              dataC
-            }
-          }, {
-            {
-              dataD
-            }
-          },],
-          backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(255, 159, 64, 0.2)', 'rgba(75, 192, 192, 0.2)',
-            'rgba(54, 162, 235, 0.2)'
-          ],
-          borderWidth: 2
-        }]
-      },
-      options: {
-        indexAxis: 'y',
-        scales: {
-          x: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
-  </script>
-  <!-- <script>
-        const element = document.getElementById('myChart2');
-        element.style.width = '600px'; // Set the text color to red
-        element.style.height = '300px'; // Set the font size to 24 pixels
-    </script> -->
 
 
   <script src="{{ url_for('static', filename='app.js') }}"></script>

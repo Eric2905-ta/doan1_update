@@ -3,6 +3,7 @@ $(document).ready(function () {
   const myChart = new Chart(ctx, {
     type: "bar",
     data: {
+      labels: ["ROIA", "ROIB", "ROIC", "ROID"],
       datasets: [
         {
           label: "Person in Area",
@@ -33,7 +34,7 @@ $(document).ready(function () {
       dataset.data.push(dataB);
       dataset.data.push(dataC);
       dataset.data.push(dataC);
-      console.log(dataset);
+      console.log(dataset.data);
     });
     myChart.update();
   }
@@ -55,5 +56,19 @@ $(document).ready(function () {
   socket.on("updateROI", function (msg) {
     removeFirstData();
     addData(msg.dataA, msg.dataB, msg.dataC, msg.dataD);
+  });
+
+
+  socket.on("sendMsg", function (msg) {
+    let wrapper = document.getElementById("alert-frame");
+    let myHTML = '';
+    for (const property in msg.msg) {
+      console.log(`${property}: ${msg.msg[property]}`);
+      myHTML +=
+        '<div id="alert"><span>' +
+        msg.msg[property] +
+        '</span> <span class="closebtn" onclick="this.parentElement.style.display='+"'none'"+';">&times;</span></div>';
+      wrapper.innerHTML = myHTML;
+    }
   });
 });

@@ -64,12 +64,15 @@ def background_thread():
     print("Generating random sensor values")
     while True:
         data, dataA, dataB, dataC, dataD = get_data()
+        msg = generate_messages(data)
         socketio.emit('updateROI', {
                       "dataA": dataA,
                       "dataB": dataB,
                       "dataC": dataC,
                       "dataD": dataD, })
-        socketio.sleep(1)
+        socketio.emit('sendMsg', {
+                      "msg": msg})
+        socketio.sleep(10)
 
 
 def generate_messages(data):
